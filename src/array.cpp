@@ -77,7 +77,7 @@ std::string Array::getString(uint8_t index) const
     {
         return dynamic_cast<const ShortString&>(field).value();
     }
-    if (field.typeID() == 's')
+    if (field.typeID() == 'S')
     {
         return dynamic_cast<const LongString&>(field).value();
     }
@@ -119,11 +119,11 @@ size_t Array::size() const
     size_t size = 4;
 
     // iterate over all elements
-    for (auto iter(_fields.begin()); iter != _fields.end(); ++iter)
+    for (auto item : _fields)
     {
         // add the size of the field type and size of element
-        size += sizeof((*iter)->typeID());
-        size += (*iter)->size();
+        size += sizeof(item->typeID());
+        size += item->size();
     }
 
     // return the result
@@ -135,12 +135,14 @@ size_t Array::size() const
  */
 void Array::fill(OutBuffer& buffer) const
 {
+    buffer.add(static_cast<uint32_t>(size()-4));
+
     // iterate over all elements
-    for (auto iter(_fields.begin()); iter != _fields.end(); ++iter)
+    for (auto item : _fields)
     {
         // encode the element type and element
-        buffer.add((*iter)->typeID());
-        (*iter)->fill(buffer);
+        buffer.add((uint8_t)item->typeID());
+        item->fill(buffer);
     }
 }
 

@@ -119,7 +119,7 @@ std::string Table::getString(const std::string& field_name) const
     {
         return dynamic_cast<const ShortString&>(field).value();
     }
-    if (field.typeID() == 's')
+    if (field.typeID() == 'S')
     {
         return dynamic_cast<const LongString&>(field).value();
     }
@@ -169,7 +169,7 @@ size_t Table::size() const
 void Table::fill(OutBuffer& buffer) const
 {
     // add size
-    buffer.add((uint32_t) size()-4);
+    buffer.add(static_cast<uint32_t>(size()-4));
 
     // loop through the fields
     for (auto iter(_fields.begin()); iter != _fields.end(); ++iter)
