@@ -94,16 +94,27 @@ Table Array::getTable(uint8_t index) const
     return Table();
 }
 
+/**
+ *  Number of entries in the array
+ *  @return uint32_t
+ */
 uint32_t Array::count() const
 {
   return _fields.size();
 }
 
+/**
+ *  Remove a field from the array
+ */
 void Array::pop_back()
 {
     _fields.pop_back();
 }
 
+/**
+ *  Add a field to the array
+ *  @param  value
+ */
 void Array::push_back(const Field& value)
 {
     _fields.push_back(std::shared_ptr<Field>(value.clone()));
@@ -112,6 +123,7 @@ void Array::push_back(const Field& value)
 /**
  *  Get the size this field will take when
  *  encoded in the AMQP wire-frame format
+ *  @return size_t
  */
 size_t Array::size() const
 {
@@ -132,9 +144,11 @@ size_t Array::size() const
 
 /**
  *  Write encoded payload to the given buffer.
+ *  @param  buffer
  */
 void Array::fill(OutBuffer& buffer) const
 {
+    // store total size for all elements
     buffer.add(static_cast<uint32_t>(size()-4));
 
     // iterate over all elements
