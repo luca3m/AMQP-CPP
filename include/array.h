@@ -83,20 +83,8 @@ public:
      */
     Array set(uint8_t index, const Field &value)
     {
-        // construct a shared pointer
-        auto ptr = std::shared_ptr<Field>(value.clone());
-
-        // should we overwrite an existing record?
-        if (index >= _fields.size())
-        {
-            // append index
-            _fields.push_back(ptr);
-        }
-        else
-        {
-            // overwrite pointer
-            _fields[index] = ptr;
-        }
+        // copy to a new pointer and store it
+        _fields[index] = std::shared_ptr<Field>(value.clone());
 
         // allow chaining
         return *this;
@@ -134,14 +122,14 @@ public:
     uint32_t count() const;
 
     /**
-     *  Remove last element from array
+     * Remove last element from array
      */
     void pop_back();
 
     /**
-     *  Add field to end of array
+     * Add field to end of array
      *
-     *  @param value
+     * @param value
      */
     void push_back(const Field &value);
 
@@ -176,35 +164,6 @@ public:
     virtual char typeID() const override
     {
         return 'A';
-    }
-
-    /**
-     *  Output the object to a stream
-     *  @param std::ostream
-     */
-    virtual void output(std::ostream &stream) const
-    {
-        // prefix
-        stream << "array(";
-        
-        // is this the first iteration
-        bool first = true;
-        
-        // loop through all members
-        for (auto iter : _fields) 
-        {
-            // split with comma
-            if (!first) stream << ",";
-            
-            // show output
-            stream << *iter;
-            
-            // no longer first iter
-            first = false;
-        }
-        
-        // postfix
-        stream << ")";
     }
 };
 

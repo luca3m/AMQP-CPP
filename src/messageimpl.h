@@ -37,6 +37,7 @@ protected:
         {}
 
 public:
+
     /**
      *  Set the body size
      *  This field is set when the header is received
@@ -62,9 +63,10 @@ public:
 
     /**
      *  Report to the handler
-     *  @param  consumer
+     *  @param  channel
+     *  @param  handler
      */
-    virtual void report(const DeferredConsumer& consumer) = 0;
+    virtual void report(Channel *channel, ChannelHandler *handler) = 0;
 };
 
 /**

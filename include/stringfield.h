@@ -145,16 +145,6 @@ public:
     {
         return F;
     }
-
-    /**
-     *  Output the object to a stream
-     *  @param std::ostream
-     */
-    virtual void output(std::ostream &stream) const override
-    {
-        // show
-        stream << "string(" << value() << ")";
-    }
 };
 
 /**

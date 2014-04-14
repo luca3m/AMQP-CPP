@@ -6,8 +6,6 @@
  *  @documentation public
  */
 
-#pragma once
-
 // base C++ include files
 #include <vector>
 #include <string>
@@ -19,8 +17,6 @@
 #include <cstddef>
 #include <cstring>
 #include <stdexcept>
-#include <utility>
-#include <iostream>
 
 // base C include files
 #include <stdint.h>
@@ -53,9 +49,7 @@
 // mid level includes
 #include <amqpcpp/exchangetype.h>
 #include <amqpcpp/flags.h>
-#include <amqpcpp/deferred.h>
-#include <amqpcpp/deferredconsumer.h>
-#include <amqpcpp/callbacks.h>
+#include <amqpcpp/channelhandler.h>
 #include <amqpcpp/channelimpl.h>
 #include <amqpcpp/channel.h>
 #include <amqpcpp/login.h>
