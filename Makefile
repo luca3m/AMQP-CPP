@@ -1,4 +1,4 @@
-PREFIX                  = /usr
+PREFIX                  = /usr/local
 INCLUDE_DIR             = ${PREFIX}/include
 LIBRARY_DIR             = ${PREFIX}/lib
 
